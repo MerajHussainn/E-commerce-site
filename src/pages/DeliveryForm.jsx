@@ -116,17 +116,17 @@ const DeliveryForm = ({ product, quantity, onClose, onSubmit, isFullCart = false
   const currentPaymentMethod = paymentMethods.find(m => m.id === formData.paymentMethod);
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto">
-        <div className="sticky top-0 bg-white p-6 border-b flex justify-between items-center z-10">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto shadow-2xl">
+        <div className="sticky top-0 bg-white p-4 sm:p-6 border-b flex justify-between items-center z-10">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2"><Package size={28} className="text-yellow-600" />Complete Your Order</h2>
-            <p className="text-gray-600 mt-1">{isFullCart ? 'Complete Cart Checkout' : `Buy Now: ${product.name}`}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2"><Package size={24} className="text-yellow-600 sm:w-7 sm:h-7" />Complete Your Order</h2>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">{isFullCart ? 'Complete Cart Checkout' : `Buy Now: ${product.name}`}</p>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full"><X size={24} /></button>
+          <button onClick={onClose} className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full"><X size={20} className="sm:w-6 sm:h-6" /></button>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 min-h-[600px]">
-          <div className="lg:col-span-1 bg-gradient-to-b from-yellow-50 to-amber-50 p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3">
+          <div className="lg:col-span-1 bg-gradient-to-b from-yellow-50 to-amber-50 p-4 sm:p-6">
             <div className="mb-8">
               <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><Package size={20} className="text-yellow-600" />Order Summary</h3>
               <div className="space-y-4">
@@ -176,7 +176,7 @@ const DeliveryForm = ({ product, quantity, onClose, onSubmit, isFullCart = false
                 <ul className="text-sm text-blue-800 space-y-1"><li>• Click on any payment method to test</li><li>• Dummy details auto-filled</li><li>• Click "Test Payment" to simulate</li><li>• Try all 6 payment options!</li></ul>
               </div>)}
           </div>
-          <div className="lg:col-span-2 p-6">
+          <div className="lg:col-span-2 p-4 sm:p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
               {step === 1 && (
                 <div className="space-y-6">
@@ -189,7 +189,7 @@ const DeliveryForm = ({ product, quantity, onClose, onSubmit, isFullCart = false
                 </div>)}
               {step === 2 && (
                 <div className="space-y-6">
-                  <div><h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2"><MapPin size={24} className="text-yellow-600" />Delivery Address<span className="ml-auto text-sm font-normal bg-green-100 text-green-800 px-3 py-1 rounded-full flex items-center gap-1"><Navigation size={14} />Real GPS Active</span></h3><p className="text-gray-600 mb-6">Where should we deliver your order?</p></div>
+                  <div><h3 className="text-xl font-bold text-gray-900 mb-2 flex flex-wrap items-center justify-between gap-2"><span className="flex items-center gap-2"><MapPin size={24} className="text-yellow-600" />Delivery Address</span><span className="text-xs sm:text-sm font-normal bg-green-100 text-green-800 px-3 py-1 rounded-full flex items-center gap-1"><Navigation size={14} />Real GPS Active</span></h3><p className="text-gray-600 mb-6">Where should we deliver your order?</p></div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <button type="button" onClick={getCurrentLocation} disabled={loadingLocation} className={`p-4 rounded-xl border-2 ${loadingLocation ? 'border-blue-300 bg-blue-50' : selectedMethod === 'gps' && gpsStatus === 'success' ? 'border-green-500 bg-green-50' : 'border-blue-200 bg-white hover:border-blue-400'} transition-all flex flex-col items-center justify-center text-center`}>
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${loadingLocation ? 'bg-blue-100' : 'bg-blue-100 text-blue-600'}`}>{loadingLocation ? <Loader size={24} className="animate-spin" /> : <Locate size={24} />}</div>
@@ -229,7 +229,7 @@ const DeliveryForm = ({ product, quantity, onClose, onSubmit, isFullCart = false
                 </div>)}
               {step === 3 && (
                 <div className="space-y-6">
-                  <div><h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2"><CreditCard size={24} className="text-yellow-600" />Payment Method<span className="ml-auto text-sm font-normal bg-green-100 text-green-800 px-3 py-1 rounded-full">🎯 Click to Test</span></h3></div>
+                  <div><h3 className="text-xl font-bold text-gray-900 mb-2 flex flex-wrap items-center justify-between gap-2"><span className="flex items-center gap-2"><CreditCard size={24} className="text-yellow-600" />Payment Method</span><span className="text-xs sm:text-sm font-normal bg-green-100 text-green-800 px-3 py-1 rounded-full">🎯 Click to Test</span></h3></div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {paymentMethods.map(m => (
                       <button key={m.id} type="button" onClick={() => handlePaymentMethodSelect(m.id)} className={`w-full p-4 border-2 rounded-xl cursor-pointer transition-all ${formData.paymentMethod === m.id ? m.activeColor + ' shadow-lg scale-[1.02]' : m.color + ' hover:shadow-md'}`}>
@@ -237,8 +237,8 @@ const DeliveryForm = ({ product, quantity, onClose, onSubmit, isFullCart = false
                       </button>))}
                   </div>
                   {formData.paymentMethod && currentPaymentMethod?.dummyData?.showForm && (
-                    <div className="p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border-2 border-dashed border-blue-300 space-y-4">
-                      <div className="flex justify-between items-center"><h4 className="font-bold text-gray-900 flex items-center gap-2">{currentPaymentMethod.icon}{currentPaymentMethod.label} Details<span className="text-sm font-normal bg-yellow-100 text-yellow-800 px-2 py-1 rounded ml-2">🧪 Test Data</span></h4><button type="button" onClick={() => copyDummyDetails(JSON.stringify(currentPaymentMethod.dummyData, null, 2), 'Payment details')} className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded flex items-center gap-1 hover:bg-blue-200"><Copy size={14} />Copy All</button></div>
+                    <div className="p-4 sm:p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border-2 border-dashed border-blue-300 space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><h4 className="font-bold text-gray-900 flex items-center gap-2">{currentPaymentMethod.icon}{currentPaymentMethod.label} Details<span className="text-xs sm:text-sm font-normal bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded ml-1 sm:ml-2">🧪 Test Data</span></h4><button type="button" onClick={() => copyDummyDetails(JSON.stringify(currentPaymentMethod.dummyData, null, 2), 'Payment details')} className="text-xs sm:text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded flex items-center gap-1 hover:bg-blue-200 self-start sm:self-auto"><Copy size={14} />Copy All</button></div>
                       {showCardDetails && (
                         <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="md:col-span-2"><label className="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">Card Number *<button type="button" onClick={() => copyDummyDetails(formData.cardNumber, 'Card number')} className="text-xs text-blue-600 hover:text-blue-800 flex items-center gap-1"><Copy size={12} />Copy</button></label><input type="text" name="cardNumber" value={formData.cardNumber} onChange={e => setFormData(p => ({ ...p, cardNumber: formatCardNumber(e.target.value) }))} maxLength="19" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 bg-white" placeholder="1234 5678 9012 3456" /></div>
@@ -260,11 +260,11 @@ const DeliveryForm = ({ product, quantity, onClose, onSubmit, isFullCart = false
                   <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl"><div className="flex items-center gap-3"><Shield size={20} className="text-blue-600" /><div><p className="font-medium text-blue-900">🔒 Secure Test Environment</p><p className="text-sm text-blue-700 mt-1">Demo payments only. No real money is charged.</p></div></div></div>
                   <div className="p-6 bg-gray-50 rounded-xl border border-gray-200"><h4 className="font-bold text-gray-900 mb-4">Final Order Summary</h4><div className="space-y-3"><div className="flex justify-between"><span className="text-gray-600">Items Total</span><span className="font-medium">₹{totalAmount.toFixed(2)}</span></div><div className="flex justify-between"><span className="text-gray-600">Delivery to</span><span className="font-medium text-right">{formData.city}, {formData.state} - {formData.pincode}</span></div><div className="flex justify-between"><span className="text-gray-600">Payment Method</span><span className="font-medium">{currentPaymentMethod?.label || 'Not selected'}</span></div><div className="border-t pt-3 mt-2"><div className="flex justify-between font-bold text-lg"><span>Total Payable</span><span className="text-green-700">₹{finalAmount.toFixed(2)}</span></div></div></div></div>
                 </div>)}
-              <div className="flex gap-4 pt-6 border-t">
-                {step > 1 && <button type="button" onClick={handlePrevStep} className="px-6 py-3 border border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50">← Back</button>}
-                <button type="button" onClick={onClose} className="px-6 py-3 border border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50">Cancel</button>
-                {step < 3 ? <button type="button" onClick={handleNextStep} className="flex-1 bg-yellow-500 text-white font-bold py-3 rounded-lg hover:bg-yellow-600">Continue →</button> :
-                  <button type="submit" disabled={loading || !formData.paymentMethod} className="flex-1 bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 disabled:opacity-50">{loading ? 'Placing...' : `Place Order (₹${finalAmount.toFixed(2)})`}</button>}
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 pt-6 border-t">
+                {step > 1 && <button type="button" onClick={handlePrevStep} className="px-3 sm:px-6 py-2.5 sm:py-3 border border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 text-sm sm:text-base">← Back</button>}
+                <button type="button" onClick={onClose} className="px-3 sm:px-6 py-2.5 sm:py-3 border border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 text-sm sm:text-base">Cancel</button>
+                {step < 3 ? <button type="button" onClick={handleNextStep} className="flex-1 min-w-[120px] bg-yellow-500 text-white font-bold py-2.5 sm:py-3 rounded-lg hover:bg-yellow-600 text-sm sm:text-base">Continue →</button> :
+                  <button type="submit" disabled={loading || !formData.paymentMethod} className="flex-1 min-w-[140px] bg-green-600 text-white font-bold py-2.5 sm:py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm sm:text-base">{loading ? 'Placing...' : `Place Order (₹${finalAmount.toFixed(2)})`}</button>}
               </div>
             </form>
           </div>

@@ -124,18 +124,18 @@ const TrustMetrics = () => (
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: idx * 0.1 }}
         viewport={{ once: true }}
-        className="bg-white/90 p-6 rounded-xl text-center shadow-lg border border-emerald-200"
+        className="bg-white/90 p-3.5 sm:p-6 rounded-xl text-center shadow-lg border border-emerald-200"
       >
-        <div className="text-emerald-600 mb-3 flex justify-center">{m.icon}</div>
-        <div className="text-3xl font-bold text-gray-900 mb-1">{m.value}</div>
-        <div className="text-gray-600">{m.label}</div>
+        <div className="text-emerald-600 mb-2 sm:mb-3 flex justify-center">{m.icon}</div>
+        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{m.value}</div>
+        <div className="text-gray-600 text-xs sm:text-sm">{m.label}</div>
       </motion.div>
     ))}
   </div>
 );
 
 const HeroSection = () => (
-  <motion.div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">
+  <motion.div className="relative w-full h-[50vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
      <motion.img
           src={PatnaEvent}
           alt="Farmers and Mushrooms Banner"
@@ -147,7 +147,7 @@ const HeroSection = () => (
     <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
     <div className="relative z-10 text-center px-4 max-w-4xl">
       <motion.h1
-        className="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl mb-6"
+        className="text-2xl sm:text-4xl md:text-6xl font-bold text-white drop-shadow-2xl mb-4 sm:mb-6"
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
@@ -156,7 +156,7 @@ const HeroSection = () => (
       </motion.h1>
       {/* same sub-title colour as farmer-support */}
       <motion.p
-        className="text-xl md:text-2xl text-green-300 font-medium mb-8 drop-shadow-lg"
+        className="text-base sm:text-xl md:text-2xl text-green-300 font-medium mb-6 sm:mb-8 drop-shadow-lg"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
@@ -167,14 +167,14 @@ const HeroSection = () => (
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.7 }}
-        className="flex flex-col sm:flex-row gap-4 justify-center"
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
       >
         {/* same green CTA button */}
-        <button className="bg-green-600 text-white px-8 py-3 rounded-full font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-          <Calendar size={20} /> Book Free Dairy Consultation
+        <button className="bg-green-600 text-white px-5 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
+          <Calendar size={18} /> Book Free Dairy Consultation
         </button>
-        <button className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-          <Video size={20} /> Watch Dairy Stories
+        <button className="border-2 border-white text-white px-5 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
+          <Video size={18} /> Watch Dairy Stories
         </button>
       </motion.div>
     </div>

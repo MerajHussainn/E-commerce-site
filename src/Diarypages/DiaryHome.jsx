@@ -105,7 +105,7 @@ const DairyCarousel = () => {
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   const handleCardClick = (slug) => {
-    navigate(`/diary/milkdiary#${slug}`);
+    navigate(`/product/${slug}`);
   };
 
   return (
@@ -121,18 +121,18 @@ const DairyCarousel = () => {
               className="flex-grow-0 flex-shrink-0 basis-full sm:basis-1/2 lg:basis-1/3 pl-6 cursor-pointer"
               onClick={() => handleCardClick(product.slug)}
             >
-              <div className="bg-white/5 rounded-2xl p-5 border border-white/10 hover:border-yellow-500/30 transition-all duration-300 flex flex-col sm:flex-row items-center gap-6 group">
+              <div className="bg-white/5 rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-yellow-500/30 transition-all duration-300 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 group">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-40 h-40 object-cover rounded-xl group-hover:scale-105 transition-transform"
+                  className="w-full sm:w-36 md:w-40 h-36 sm:h-36 md:h-40 object-cover rounded-xl group-hover:scale-105 transition-transform"
                 />
                 <div className="flex-1 text-center sm:text-left">
-                  <h3 className="text-xl font-bold text-yellow-400 mb-2">{product.name}</h3>
-                  <p className="text-gray-400 text-sm mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-1.5 sm:mb-2">{product.name}</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm mb-1">
                     <span className="text-gray-300 font-semibold">Taste:</span> {product.taste}
                   </p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-400 text-xs sm:text-sm">
                     <span className="text-gray-300 font-semibold">Uses:</span> {product.uses}
                   </p>
                 </div>
@@ -162,42 +162,42 @@ const DairyCarousel = () => {
 const Home = () => {
   return (
     <motion.div
-      className="min-h-screen bg-[#0a0a0a] px-6 md:px-12 py-16 flex flex-col items-center pt-24"
+      className="min-h-screen bg-[#0a0a0a] px-4 sm:px-6 md:px-12 py-12 sm:py-16 flex flex-col items-center pt-24 overflow-x-hidden"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.6 }}
     >
       {/* Hero Section */}
-      <div className="flex flex-wrap gap-12 justify-between max-w-6xl w-full">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between items-center max-w-6xl w-full">
         {/* Left Text */}
-        <div className="flex-1 text-white min-w-[300px]">
+        <div className="flex-1 text-white w-full lg:w-1/2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
           >
             <Leaf className="text-yellow-400" size={16} />
-            <span className="text-gray-400 text-sm">Premium Dairy Products</span>
+            <span className="text-gray-400 text-xs sm:text-sm">Premium Dairy Products</span>
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight mb-4 sm:mb-6 tracking-tight">
             Milk Dairy <br />
             <span className="bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
               Buy, Learn & Build
             </span>
           </h1>
           
-          <p className="text-gray-400 text-lg mb-8 max-w-lg">
+          <p className="text-gray-400 text-base sm:text-lg mb-6 sm:mb-8 max-w-lg leading-relaxed">
             Discover everything about Milk Dairy – from healthy Dairy Products to
             healthy recipes and community events. All in one place 🥛
           </p>
 
-          <div className="flex flex-wrap gap-4">
-            <Link to="/diary/milkdiary">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
+            <Link to="/dairy/milkdiary" className="w-full sm:w-auto">
               <motion.button 
-                className="bg-gradient-to-r from-yellow-500 to-amber-600 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 shadow-lg shadow-yellow-500/25"
+                className="w-full sm:w-auto bg-gradient-to-r from-yellow-500 to-amber-600 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/25 text-sm sm:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -205,7 +205,7 @@ const Home = () => {
               </motion.button>
             </Link>
             <motion.button 
-              className="border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/5 transition-colors"
+              className="w-full sm:w-auto border-2 border-white/20 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold hover:bg-white/5 transition-colors text-sm sm:text-base text-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -216,17 +216,17 @@ const Home = () => {
 
         {/* Right Image */}
         <motion.div 
-          className="flex-1 flex justify-center min-w-[300px]"
+          className="flex-1 flex justify-center w-full lg:w-1/2 mt-6 lg:mt-0"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="relative">
+          <div className="relative max-w-full">
             <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 to-amber-500/20 rounded-3xl blur-2xl" />
             <img
               src={heroImage}
               alt="Dairy farm preview"
-              className="relative max-w-full rounded-3xl border border-white/10 shadow-2xl"
+              className="relative max-w-full rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl object-cover"
             />
           </div>
         </motion.div>
@@ -234,12 +234,12 @@ const Home = () => {
 
       {/* Middle Heading */}
       <motion.div 
-        className="w-full mt-28 flex justify-center"
+        className="w-full mt-16 sm:mt-24 md:mt-28 flex justify-center px-2"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <div className="text-white text-xl md:text-2xl font-semibold bg-white/5 border border-white/10 px-8 py-3 rounded-full inline-block">
+        <div className="text-white text-sm sm:text-lg md:text-2xl font-semibold bg-white/5 border border-white/10 px-4 sm:px-8 py-3 rounded-2xl sm:rounded-full inline-block text-center max-w-full">
           Fresh Dairy Products, Healthy Living, Strong Community.
         </div>
       </motion.div>

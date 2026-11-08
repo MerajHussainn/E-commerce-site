@@ -857,51 +857,51 @@ const Knowledge = () => {
   }, [searchQuery, selectedCategory]);
 
   return (
-    <div className="bg-[#fdfbe9] min-h-screen py-12 px-4 md:px-6">
+    <div className="bg-[#fdfbe9] min-h-screen py-8 sm:py-12 px-3 sm:px-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-12"
+        className="text-center mb-8 sm:mb-12"
       >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-green-900 mb-6">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-green-900 mb-4 sm:mb-6">
           Mushroom <span className="text-green-600">Knowledge Hub</span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+        <p className="text-sm sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-6 sm:mb-8">
           Explore, learn, and master the fascinating world of mushrooms. From identification to cooking tips.
         </p>
         
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={24} />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search mushrooms by name, taste, or uses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-full border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-lg"
+              className="w-full pl-11 pr-4 py-3 sm:py-4 rounded-full border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base md:text-lg"
             />
           </div>
         </div>
         
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
-          <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <div className="text-2xl font-bold text-green-700">{mushroomsData.length}</div>
-            <div className="text-sm text-gray-600">Mushroom Types</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto mb-8">
+          <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm text-center">
+            <div className="text-xl sm:text-2xl font-bold text-green-700">{mushroomsData.length}</div>
+            <div className="text-xs sm:text-sm text-gray-600">Mushroom Types</div>
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <div className="text-2xl font-bold text-green-700">8+</div>
-            <div className="text-sm text-gray-600">Health Benefits</div>
+          <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm text-center">
+            <div className="text-xl sm:text-2xl font-bold text-green-700">8+</div>
+            <div className="text-xs sm:text-sm text-gray-600">Health Benefits</div>
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <div className="text-2xl font-bold text-green-700">20+</div>
-            <div className="text-sm text-gray-600">Cooking Uses</div>
+          <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm text-center">
+            <div className="text-xl sm:text-2xl font-bold text-green-700">20+</div>
+            <div className="text-xs sm:text-sm text-gray-600">Cooking Uses</div>
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <div className="text-2xl font-bold text-green-700">100%</div>
-            <div className="text-sm text-gray-600">Organic Info</div>
+          <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm text-center">
+            <div className="text-xl sm:text-2xl font-bold text-green-700">100%</div>
+            <div className="text-xs sm:text-sm text-gray-600">Organic Info</div>
           </div>
         </div>
       </motion.div>
@@ -981,12 +981,12 @@ const Knowledge = () => {
           </div>
         ) : (
           <>
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 {selectedCategory === 'all' ? 'All Mushrooms' : 
                  selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1) + ' Mushrooms'}
               </h2>
-              <span className="text-gray-600">{filteredMushrooms.length} found</span>
+              <span className="text-sm text-gray-600">{filteredMushrooms.length} found</span>
             </div>
             
             <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

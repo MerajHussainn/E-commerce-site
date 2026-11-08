@@ -144,12 +144,12 @@ const testimonials = [
 
 // --- TRUST METRICS COMPONENT ---
 const TrustMetrics = () => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-8 sm:mb-12">
     {[
-      { icon: <Users size={32} />, value: "500+", label: "Farmers Supported" },
-      { icon: <TrendingUp size={32} />, value: "₹2Cr+", label: "Income Generated" },
-      { icon: <CheckCircle size={32} />, value: "95%", label: "Success Rate" },
-      { icon: <Shield size={32} />, value: "24/7", label: "Support Available" }
+      { icon: <Users size={28} />, value: "500+", label: "Farmers Supported" },
+      { icon: <TrendingUp size={28} />, value: "₹2Cr+", label: "Income Generated" },
+      { icon: <CheckCircle size={28} />, value: "95%", label: "Success Rate" },
+      { icon: <Shield size={28} />, value: "24/7", label: "Support Available" }
     ].map((metric, idx) => (
       <motion.div
         key={idx}
@@ -157,11 +157,11 @@ const TrustMetrics = () => (
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: idx * 0.1 }}
         viewport={{ once: true }}
-        className="bg-white p-6 rounded-xl text-center shadow-lg border border-green-200"
+        className="bg-white p-3.5 sm:p-6 rounded-xl text-center shadow-lg border border-green-200"
       >
-        <div className="text-green-600 mb-3 flex justify-center">{metric.icon}</div>
-        <div className="text-3xl font-bold text-gray-900 mb-1">{metric.value}</div>
-        <div className="text-gray-600">{metric.label}</div>
+        <div className="text-green-600 mb-2 sm:mb-3 flex justify-center">{metric.icon}</div>
+        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{metric.value}</div>
+        <div className="text-gray-600 text-xs sm:text-sm">{metric.label}</div>
       </motion.div>
     ))}
   </div>
@@ -169,7 +169,7 @@ const TrustMetrics = () => (
 
 // --- ENHANCED HERO SECTION ---
 const HeroSection = () => (
-  <motion.div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">
+  <motion.div className="relative w-full h-[50vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
     <motion.img
       src={heroImage}
       alt="Farmers and Mushrooms Banner"
@@ -181,7 +181,7 @@ const HeroSection = () => (
     <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
     <div className="relative z-10 text-center px-4 max-w-4xl">
       <motion.h1
-        className="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl mb-6"
+        className="text-2xl sm:text-4xl md:text-6xl font-bold text-white drop-shadow-2xl mb-4 sm:mb-6"
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
@@ -189,7 +189,7 @@ const HeroSection = () => (
         Empowering Mushroom Farmers
       </motion.h1>
       <motion.p
-        className="text-xl md:text-2xl text-green-300 font-medium mb-8 drop-shadow-lg"
+        className="text-base sm:text-xl md:text-2xl text-green-300 font-medium mb-6 sm:mb-8 drop-shadow-lg"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
@@ -200,13 +200,13 @@ const HeroSection = () => (
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.7 }}
-        className="flex flex-col sm:flex-row gap-4 justify-center"
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
       >
-        <button className="bg-green-600 text-white px-8 py-3 rounded-full font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-          <Calendar size={20} /> Book Free Consultation
+        <button className="bg-green-600 text-white px-5 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
+          <Calendar size={18} /> Book Free Consultation
         </button>
-        <button className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-          <Video size={20} /> Watch Success Stories
+        <button className="border-2 border-white text-white px-5 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
+          <Video size={18} /> Watch Success Stories
         </button>
       </motion.div>
     </div>
@@ -512,11 +512,11 @@ const EnhancedContactForm = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-3xl p-8 mb-16">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 mb-12 sm:mb-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Grow With Us?</h2>
-          <p className="text-gray-700 mb-8 text-lg">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">Ready to Grow With Us?</h2>
+          <p className="text-gray-700 mb-6 sm:mb-8 text-sm sm:text-base md:text-lg">
             Join thousands of successful farmers who trust MushroomMart for their farming journey.
             Get personalized support from day one.
           </p>

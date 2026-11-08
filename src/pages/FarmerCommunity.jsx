@@ -793,18 +793,18 @@ const CreatePostModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl w-full max-w-2xl">
-        <div className="p-6 border-b">
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 sm:p-4 backdrop-blur-sm">
+      <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[92vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 border-b">
           <div className="flex justify-between items-center">
-            <h3 className="text-2xl font-bold text-gray-900">Create Post</h3>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full">
-              <XCircle size={24} className="text-gray-600" />
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Create Post</h3>
+            <button onClick={onClose} className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full">
+              <XCircle size={22} className="text-gray-600 sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>
         
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-900 mb-2">Post Type</label>
             <div className="flex flex-wrap gap-2">
@@ -951,44 +951,44 @@ const FarmerCommunity = () => {
       <CreatePostModal isOpen={showCreatePost} onClose={() => setShowCreatePost(false)} />
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-900 via-emerald-800 to-green-900 py-12 px-4">
+      <div className="bg-gradient-to-r from-green-900 via-emerald-800 to-green-900 py-8 sm:py-12 px-3 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="text-white">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Farmer Community Hub</h1>
-              <p className="text-xl text-green-200 mb-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
+            <div className="text-white w-full lg:w-auto">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Farmer Community Hub</h1>
+              <p className="text-sm sm:text-lg md:text-xl text-green-200 mb-6 sm:mb-8">
                 Connect, Learn, and Grow Together with Fellow Farmers
               </p>
               
               {/* Community Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold">{communityStats.totalFarmers}+</div>
-                  <div className="text-green-300">Farmers</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="text-center bg-white/5 sm:bg-transparent p-2 sm:p-0 rounded-lg">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">{communityStats.totalFarmers}+</div>
+                  <div className="text-green-300 text-xs sm:text-sm">Farmers</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold">{communityStats.onlineNow}</div>
-                  <div className="text-green-300">Online Now</div>
+                <div className="text-center bg-white/5 sm:bg-transparent p-2 sm:p-0 rounded-lg">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">{communityStats.onlineNow}</div>
+                  <div className="text-green-300 text-xs sm:text-sm">Online Now</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold">{communityStats.postsToday}</div>
-                  <div className="text-green-300">Posts Today</div>
+                <div className="text-center bg-white/5 sm:bg-transparent p-2 sm:p-0 rounded-lg">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">{communityStats.postsToday}</div>
+                  <div className="text-green-300 text-xs sm:text-sm">Posts Today</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold">{communityStats.newConnections}</div>
-                  <div className="text-green-300">New Connections</div>
+                <div className="text-center bg-white/5 sm:bg-transparent p-2 sm:p-0 rounded-lg">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">{communityStats.newConnections}</div>
+                  <div className="text-green-300 text-xs sm:text-sm">New Connections</div>
                 </div>
               </div>
               
               <button
                 onClick={() => setShowCreatePost(true)}
-                className="bg-white text-green-700 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors flex items-center gap-3"
+                className="bg-white text-green-700 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-gray-100 transition-colors flex items-center gap-2 text-sm sm:text-base"
               >
-                <Plus size={24} /> Create Post
+                <Plus size={20} /> Create Post
               </button>
             </div>
             
-            <div className="lg:w-1/3">
+            <div className="w-full lg:w-1/3">
               <WeatherWidget />
             </div>
           </div>

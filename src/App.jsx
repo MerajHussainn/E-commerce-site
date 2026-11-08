@@ -13,6 +13,7 @@ import NavbarMain from "./components/NavbarMain";
 import Footer from "./components/Footer";
 import DiaryNavbar from "./Diarycomponents/DiaryNavbar";
 import Diaryfooter from "./Diarycomponents/Diaryfooter";
+import ScrollToTop from "./components/ScrollToTop";
 
 /* ================= MAIN PAGES ================= */
 import Home from "./pages/Home";
@@ -26,6 +27,7 @@ import Dashboard from "./pages/Dashboard";
 import Cart from "./pages/Cart";
 import MyProfile from "./pages/myprofile";
 import MyOrders from "./pages/myorders";
+import ProductDetail from "./pages/ProductDetail";
 
 /* ================= DIARY PAGES ================= */
 import DiaryHome from "./Diarypages/DiaryHome";
@@ -35,20 +37,6 @@ import Diaryknowledge from "./Diarypages/Diaryknowledge";
 import DiarySupport from "./Diarypages/DiarySupport";
 import DiaryEvents from "./Diarypages/DiaryEvents";
 import DiaryCommunity from "./Diarypages/DiaryCommunity";
-
-/* ================= ADMIN PANEL ================= */
-import Sidebar from "./Admin-Panel/Components/Sidebar";
-import CMS from "./Admin-Panel/pages/CMS";
-import Coupons from "./Admin-Panel/pages/Coupons";
-import Customers from "./Admin-Panel/pages/Customers";
-import AdminDashboard from "./Admin-Panel/pages/Dashboard";
-import Inventory from "./Admin-Panel/pages/Inventory";
-import Payments from "./Admin-Panel/pages/Payments";
-import Orders from "./Admin-Panel/pages/Orders";
-import Products from "./Admin-Panel/pages/Products";
-import Reports from "./Admin-Panel/pages/Reports";
-import Roles from "./Admin-Panel/pages/Roles";
-import Settings from "./Admin-Panel/pages/Settings";
 
 /* ================= FOUNDATION PAGES (FIXED) ================= */
 import F_Home from "./Foundationpage/F_Home";
@@ -137,9 +125,16 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <OrderProvider>
-          <div className="bg-[#FDFBE9] min-h-screen flex flex-col font-inter">
+          <div className="bg-[#0a0a0a] text-white min-h-screen flex flex-col font-inter relative overflow-x-hidden universal-bg">
+            <ScrollToTop />
             <Toaster position="top-center" />
             <AuthModal />
+
+            {/* Universal Ambient Background Glow */}
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+              <div className="absolute w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-green-500/5 rounded-full blur-[140px] -top-32 -left-20" />
+              <div className="absolute w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-yellow-500/5 rounded-full blur-[120px] bottom-10 right-0" />
+            </div>
 
             {/* ================= CHECKOUT MODAL ================= */}
             {showCheckoutModal && checkoutData && (
@@ -197,6 +192,8 @@ function App() {
                 <Route path="knowledge" element={<Knowledge />} />
                 <Route path="community" element={<FarmerCommunity />} />
                 <Route path="cart" element={<Cart />} />
+                <Route path="product/:slug" element={<ProductDetail />} />
+                <Route path="mushrooms/:slug" element={<ProductDetail />} />
 
                 <Route
                   path="dashboard"
@@ -224,6 +221,18 @@ function App() {
                 />
               </Route>
 
+              {/* DAIRY */}
+              <Route path="dairy" element={<DiaryLayout />}>
+                <Route index element={<DiaryHome />} />
+                <Route path="diarycontacts" element={<DiaryContacts />} />
+                <Route path="milkdiary" element={<MilkDiary />} />
+                <Route path="diaryknowledge" element={<Diaryknowledge />} />
+                <Route path="diarysupport" element={<DiarySupport />} />
+                <Route path="diaryevents" element={<DiaryEvents />} />
+                <Route path="dairycommunity" element={<DiaryCommunity />} />
+                <Route path="product/:slug" element={<ProductDetail />} />
+              </Route>
+
               {/* DIARY */}
               <Route path="diary" element={<DiaryLayout />}>
                 <Route index element={<DiaryHome />} />
@@ -233,22 +242,7 @@ function App() {
                 <Route path="diarysupport" element={<DiarySupport />} />
                 <Route path="diaryevents" element={<DiaryEvents />} />
                 <Route path="dairycommunity" element={<DiaryCommunity />} />
-              </Route>
-
-              {/* ADMIN */}
-              <Route path="admin/*" element={<Sidebar />}>
-                <Route index element={<AdminDashboard />} />
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="cms" element={<CMS />} />
-                <Route path="coupons" element={<Coupons />} />
-                <Route path="customers" element={<Customers />} />
-                <Route path="inventory" element={<Inventory />} />
-                <Route path="payments" element={<Payments />} />
-                <Route path="orders" element={<Orders />} />
-                <Route path="products" element={<Products />} />
-                <Route path="reports" element={<Reports />} />
-                <Route path="roles" element={<Roles />} />
-                <Route path="settings" element={<Settings />} />
+                <Route path="product/:slug" element={<ProductDetail />} />
               </Route>
 
               {/* FALLBACK */}

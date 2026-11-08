@@ -190,9 +190,9 @@ const MushroomCarousel = () => {
     [emblaApi]
   );
 
-  // Handle click to navigate with hash
+  // Handle click to navigate to product detail page
   const handleCardClick = (slug) => {
-    navigate(`/mushrooms#${slug}`);
+    navigate(`/product/${slug}`);
   };
 
   // Update selected index
@@ -321,14 +321,14 @@ const Home = () => {
 
   return (
     <motion.div
-      className="bg-gradient-to-b from-[#fdfbe9] via-[#f4fce3] to-[#e8f8f0] min-h-screen px-4 sm:px-6 lg:px-12 py-12 md:py-16"
+      className="bg-gradient-to-b from-[#fdfbe9] via-[#f4fce3] to-[#e8f8f0] min-h-screen px-4 sm:px-6 lg:px-12 pt-24 sm:pt-28 pb-16 overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
       {/* Hero Section */}
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between items-center max-w-6xl mx-auto mb-20">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between items-center max-w-6xl mx-auto mb-16 sm:mb-20">
         {/* Left Text */}
         <div className="flex-1 w-full lg:w-1/2">
           <motion.div
@@ -336,27 +336,27 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 text-gray-900 tracking-tight">
               UrbanFungi{" "}
               <span className="block bg-gradient-to-r from-green-600 via-lime-500 to-yellow-500 bg-clip-text text-transparent">
                 Buy, Learn & Grow
               </span>
-              <span className="text-xl md:text-2xl font-normal text-gray-700 block mt-4">
+              <span className="text-lg sm:text-xl md:text-2xl font-normal text-gray-700 block mt-3 sm:mt-4">
                 with the Mushroom Community 🍄
               </span>
             </h1>
             
-            <p className="text-gray-700 text-lg md:text-xl mb-8 leading-relaxed">
+            <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed">
               Discover everything about mushrooms – from organic cultivation to
               healthy recipes and community events. All in one place.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Link to="/mushrooms">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+              <Link to="/mushrooms" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative overflow-hidden group bg-gradient-to-r from-green-500 via-lime-400 to-yellow-400 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
+                  className="relative overflow-hidden group bg-gradient-to-r from-green-500 via-lime-400 to-yellow-400 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto text-center"
                 >
                   <span className="relative z-10">Explore Mushrooms</span>
                   <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-700 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
@@ -366,28 +366,28 @@ const Home = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 border-green-600 text-green-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto"
+                className="border-2 border-green-600 text-green-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-green-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto text-center"
               >
                 Request a Demo
               </motion.button>
             </div>
 
             {/* Benefits */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-3 bg-white/60 backdrop-blur-sm p-3 rounded-xl border border-green-100"
                 >
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${benefit.color} text-white`}>
+                  <div className={`p-2 rounded-lg bg-gradient-to-r ${benefit.color} text-white shrink-0`}>
                     {benefit.icon}
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">{benefit.title}</p>
-                    <p className="text-sm text-gray-600">{benefit.description}</p>
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">{benefit.title}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">{benefit.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -400,29 +400,29 @@ const Home = () => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex-1 w-full lg:w-1/2 flex justify-center"
+          className="flex-1 w-full lg:w-1/2 flex justify-center mt-6 lg:mt-0"
         >
-          <div className="relative">
+          <div className="relative max-w-full">
             <img
               src={heroImage}
               alt="Mushroom preview"
-              className="w-full max-w-lg rounded-2xl shadow-2xl border-4 border-yellow-200 hover:scale-[1.02] transition-transform duration-300"
+              className="w-full max-w-sm sm:max-w-md lg:max-w-lg rounded-2xl shadow-2xl border-4 border-yellow-200 hover:scale-[1.02] transition-transform duration-300 object-cover"
             />
-            <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-green-500 to-yellow-400 text-white px-6 py-3 rounded-xl shadow-xl">
-              <p className="font-bold text-lg">Fresh Daily!</p>
-              <p className="text-sm">From local farms</p>
+            <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 bg-gradient-to-r from-green-500 to-yellow-400 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-xl">
+              <p className="font-bold text-sm sm:text-lg">Fresh Daily!</p>
+              <p className="text-xs sm:text-sm">From local farms</p>
             </div>
           </div>
         </motion.div>
       </div>
 
       {/* Middle Heading */}
-      <div className="w-full max-w-6xl mx-auto my-20 flex justify-center">
+      <div className="w-full max-w-6xl mx-auto my-12 sm:my-20 flex justify-center px-2">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="text-gray-900 text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-500 via-lime-400 to-yellow-400 px-8 py-4 rounded-full inline-block shadow-lg hover:shadow-xl transition-shadow duration-300"
+          className="text-gray-900 text-base sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-500 via-lime-400 to-yellow-400 px-5 sm:px-8 py-3.5 sm:py-4 rounded-2xl sm:rounded-full inline-block shadow-lg hover:shadow-xl transition-shadow duration-300 text-center max-w-full"
         >
           Fresh Mushrooms, Healthy Living, Strong Community.
         </motion.div>
@@ -432,8 +432,8 @@ const Home = () => {
       <MushroomCarousel />
 
       {/* Stats Section */}
-      <section className="w-full max-w-6xl mx-auto mt-20 px-4 py-12 bg-gradient-to-r from-green-50 to-yellow-50 rounded-3xl shadow-lg">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="w-full max-w-6xl mx-auto mt-16 sm:mt-20 px-4 py-8 sm:py-12 bg-gradient-to-r from-green-50 to-yellow-50 rounded-2xl sm:rounded-3xl shadow-lg">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {[
             { number: "500+", label: "Happy Farmers" },
             { number: "50+", label: "Mushroom Varieties" },
@@ -514,72 +514,72 @@ const Home = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="w-full max-w-2xl mx-auto mt-20 px-4">
+      <section className="w-full max-w-2xl mx-auto mt-16 sm:mt-20 px-2 sm:px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-8 text-center text-white shadow-xl"
+          className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center text-white shadow-xl"
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
             Stay Updated with Mushroom News
           </h3>
-          <p className="mb-6 opacity-90 text-lg">
+          <p className="mb-6 opacity-90 text-sm sm:text-base md:text-lg">
             Get latest recipes, farming tips, and community events in your inbox.
           </p>
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-lg"
+              className="w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl sm:rounded-full text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm sm:text-base"
               required
             />
             <motion.button
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-green-700 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors text-lg shadow-lg"
+              className="bg-gray-900 sm:bg-white text-white sm:text-green-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-full font-bold hover:bg-gray-100 transition-colors text-sm sm:text-base shadow-lg shrink-0"
             >
               Subscribe
             </motion.button>
           </form>
-          <p className="text-sm opacity-75 mt-4">
+          <p className="text-xs sm:text-sm opacity-75 mt-4">
             No spam. Unsubscribe anytime.
           </p>
         </motion.div>
       </section>
 
       {/* CTA Section */}
-      <section className="w-full max-w-4xl mx-auto mt-20 px-4 text-center">
+      <section className="w-full max-w-4xl mx-auto mt-16 sm:mt-20 px-2 sm:px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-br from-green-100 to-yellow-100 p-8 md:p-12 rounded-3xl shadow-lg"
+          className="bg-gradient-to-br from-green-100 to-yellow-100 p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl shadow-lg"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
             Ready to Join the Mushroom Revolution?
           </h3>
-          <p className="text-gray-700 mb-8 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 mb-6 sm:mb-8 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
             Whether you're a farmer, chef, or mushroom lover, there's a place for you in our community.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/register">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
+            <Link to="/register" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+                className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all"
               >
                 Join Now Free
               </motion.button>
             </Link>
-            <Link to="/contact">
+            <Link to="/contact" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 border-green-600 text-green-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-50 transition-all"
+                className="w-full sm:w-auto border-2 border-green-600 text-green-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-green-50 transition-all"
               >
                 Contact Sales
               </motion.button>

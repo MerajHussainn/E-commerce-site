@@ -289,7 +289,7 @@ const HeroSection = () => {
       
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
         <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-2xl mb-6"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-2xl mb-4 sm:mb-6"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -297,7 +297,7 @@ const HeroSection = () => {
           Mushroom Community Events
         </motion.h1>
         <motion.p
-          className="text-xl md:text-2xl text-green-300 font-medium mb-8 drop-shadow-lg"
+          className="text-base sm:text-xl md:text-2xl text-green-300 font-medium mb-6 sm:mb-8 drop-shadow-lg"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -311,18 +311,18 @@ const HeroSection = () => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 inline-block border border-green-500/30"
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-6 md:p-8 inline-block border border-green-500/30 max-w-full"
           >
-            <p className="text-green-300 font-bold mb-4">Next Big Event Starts In:</p>
-            <div className="flex gap-4 md:gap-8 justify-center">
+            <p className="text-green-300 font-bold mb-3 sm:mb-4 text-xs sm:text-base">Next Big Event Starts In:</p>
+            <div className="flex flex-wrap gap-2 sm:gap-4 md:gap-8 justify-center">
               {Object.entries(timeLeft).map(([unit, value]) => (
-                <div key={unit} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-white">{value}</div>
-                  <div className="text-green-300 text-sm uppercase">{unit}</div>
+                <div key={unit} className="text-center min-w-[45px] sm:min-w-[60px]">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{value}</div>
+                  <div className="text-green-300 text-[10px] sm:text-xs md:text-sm uppercase">{unit}</div>
                 </div>
               ))}
             </div>
-            <p className="text-white mt-4">{nextEvent.name}</p>
+            <p className="text-white mt-3 sm:mt-4 text-xs sm:text-sm truncate">{nextEvent.name}</p>
           </motion.div>
         )}
       </div>
@@ -375,19 +375,19 @@ const EventFilterBar = ({ activeFilter, setActiveFilter, searchQuery, setSearchQ
             ))}
           </div>
           
-          <div className="flex gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <div className="relative w-full sm:w-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
                 type="text"
                 placeholder="Search events..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[200px]"
+                className="pl-9 pr-4 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
               />
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700">
-              <Filter size={20} /> Filter
+            <button className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 text-sm">
+              <Filter size={18} /> Filter
             </button>
           </div>
         </div>
@@ -477,14 +477,14 @@ const EventModal = ({ event, onClose }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-md"
+        className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-2 sm:p-4 backdrop-blur-md"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <motion.div
-          className="bg-[#fdfbe9] rounded-3xl border border-green-500/30 w-full max-w-6xl max-h-[90vh] overflow-hidden shadow-2xl"
+          className="bg-[#fdfbe9] rounded-2xl sm:rounded-3xl border border-green-500/30 w-full max-w-6xl max-h-[92vh] overflow-hidden shadow-2xl flex flex-col"
           initial={{ scale: 0.9, y: 50, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.9, y: 50, opacity: 0 }}
@@ -496,37 +496,37 @@ const EventModal = ({ event, onClose }) => {
             <img
               src={event.image}
               alt={event.name}
-              className="w-full h-64 object-cover"
+              className="w-full h-48 sm:h-64 object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             
-            <div className="absolute top-4 right-4 flex gap-2">
+            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex gap-2">
               <button
                 onClick={handleShare}
-                className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30"
+                className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30"
               >
-                <Share2 size={20} className="text-white" />
+                <Share2 size={18} className="text-white" />
               </button>
-              <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30">
-                <Bookmark size={20} className="text-white" />
+              <button className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30">
+                <Bookmark size={18} className="text-white" />
               </button>
               <button
                 onClick={onClose}
-                className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30"
+                className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30"
               >
-                <X size={20} className="text-white" />
+                <X size={18} className="text-white" />
               </button>
             </div>
             
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">{event.name}</h2>
-              <div className="flex flex-wrap gap-4 items-center">
-                <div className="flex items-center gap-2">
-                  <Calendar size={18} />
+            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2">{event.name}</h2>
+              <div className="flex flex-wrap gap-2 sm:gap-4 items-center text-xs sm:text-sm">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Calendar size={16} />
                   <span>{event.date} • {event.time}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <MapPin size={18} />
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <MapPin size={16} />
                   <span>{event.location}</span>
                 </div>
               </div>
@@ -534,13 +534,13 @@ const EventModal = ({ event, onClose }) => {
           </div>
 
           {/* Tabs */}
-          <div className="border-b">
+          <div className="border-b shrink-0">
             <div className="flex overflow-x-auto">
               {["details", "gallery", "register", "contact"].map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-6 py-3 font-medium capitalize whitespace-nowrap ${
+                  className={`px-4 sm:px-6 py-2.5 sm:py-3 font-medium capitalize whitespace-nowrap text-xs sm:text-sm md:text-base ${
                     activeTab === tab
                       ? "border-b-2 border-green-600 text-green-600"
                       : "text-gray-600 hover:text-gray-900"
@@ -553,7 +553,7 @@ const EventModal = ({ event, onClose }) => {
           </div>
 
           {/* Content */}
-          <div className="p-6 overflow-y-auto max-h-[50vh]">
+          <div className="p-4 sm:p-6 overflow-y-auto max-h-[50vh]">
             {activeTab === "details" && (
               <div className="space-y-6">
                 <div>
@@ -869,48 +869,48 @@ export default function EventsPage() {
             viewport={{ once: true, amount: 0.2 }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center gap-3">
               <Star className="text-yellow-500" /> Featured Event
             </h2>
             
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
+                <div className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="inline-flex items-center gap-2 bg-green-500 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-bold mb-4 self-start">
                     Featured
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                     {featuredEvent.name}
                   </h3>
                   <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <Calendar size={20} />
+                    <div className="flex items-center gap-3 text-gray-700 text-sm sm:text-base">
+                      <Calendar size={18} />
                       <span>{featuredEvent.date} • {featuredEvent.time}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <MapPin size={20} />
+                    <div className="flex items-center gap-3 text-gray-700 text-sm sm:text-base">
+                      <MapPin size={18} />
                       <span>{featuredEvent.location}</span>
                     </div>
                   </div>
-                  <p className="text-gray-700 mb-8 text-lg">{featuredEvent.description}</p>
+                  <p className="text-gray-700 mb-6 sm:mb-8 text-sm sm:text-base md:text-lg">{featuredEvent.description}</p>
                   
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <button
                       onClick={() => setSelectedEvent(featuredEvent)}
-                      className="bg-green-600 text-white px-8 py-3 rounded-full font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                      className="bg-green-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
                     >
-                      <Ticket size={20} /> Register Now
+                      <Ticket size={18} /> Register Now
                     </button>
                     <button
                       onClick={() => setSelectedEvent(featuredEvent)}
-                      className="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full font-bold hover:bg-green-50 transition-colors"
+                      className="border-2 border-green-600 text-green-600 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold hover:bg-green-50 transition-colors text-sm sm:text-base"
                     >
                       View Details
                     </button>
                   </div>
                 </div>
                 
-                <div className="relative min-h-[400px]">
+                <div className="relative min-h-[250px] sm:min-h-[350px] lg:min-h-[400px]">
                   <img
                     src={featuredEvent.image}
                     alt={featuredEvent.name}
@@ -929,14 +929,14 @@ export default function EventsPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
               {activeFilter === "all" ? "All Events" : 
                activeFilter === "upcoming" ? "Upcoming Events" :
                activeFilter === "past" ? "Past Events" :
                `${activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)}s`}
             </h2>
-            <span className="text-gray-600">
+            <span className="text-xs sm:text-sm text-gray-600">
               {filteredEvents.length} events found
             </span>
           </div>

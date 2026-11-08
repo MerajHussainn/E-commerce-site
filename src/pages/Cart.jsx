@@ -107,15 +107,15 @@ const CartPage = () => {
     <>
       <div className="min-h-screen bg-gradient-to-b from-[#fdfbe9] to-white py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-bold text-gray-900" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               Shopping Cart ({cartCount} {cartCount === 1 ? 'item' : 'items'})
             </h1>
-            <div className="flex gap-4">
-              <span className="bg-[#95e500] text-white px-3 py-1 rounded-full text-sm font-bold">
+            <div className="flex flex-wrap gap-2 sm:gap-4">
+              <span className="bg-[#95e500] text-white px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
                 {mushroomItems.length} Mushrooms
               </span>
-              <span className="bg-[#f3cc00] text-white px-3 py-1 rounded-full text-sm font-bold">
+              <span className="bg-[#f3cc00] text-white px-3 py-1 rounded-full text-xs sm:text-sm font-bold">
                 {dairyItems.length} Dairy Items
               </span>
             </div>
@@ -236,17 +236,17 @@ const CartPage = () => {
                   Clear Entire Cart
                 </button>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     to="/mushrooms"
-                    className="flex-1 text-center bg-[#95e500] text-white py-2 rounded-lg hover:bg-[#7bc400] transition-colors text-sm font-medium"
+                    className="flex-1 text-center bg-[#95e500] text-white py-2.5 px-3 rounded-lg hover:bg-[#7bc400] transition-colors text-xs sm:text-sm font-medium"
                   >
                     <Sprout size={16} className="inline mr-1" />
                     Add More Mushrooms
                   </Link>
                   <Link
                     to="/diary/milkdiary"
-                    className="flex-1 text-center bg-[#f3cc00] text-white py-2 rounded-lg hover:bg-[#d9b400] transition-colors text-sm font-medium"
+                    className="flex-1 text-center bg-[#f3cc00] text-white py-2.5 px-3 rounded-lg hover:bg-[#d9b400] transition-colors text-xs sm:text-sm font-medium"
                   >
                     <Milk size={16} className="inline mr-1" />
                     Add More Dairy
@@ -318,30 +318,30 @@ const CartItemCard = ({ item, onQuantityChange, onRemove, type }) => {
             </button>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className={`flex items-center gap-2 rounded-full p-1 ${bgColor}`}>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className={`flex items-center gap-1 sm:gap-2 rounded-full p-1 ${bgColor}`}>
                 <button
                   onClick={() => onQuantityChange(item.id, item.quantity - 1)}
-                  className="w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center"
                 >
                   <Minus size={14} />
                 </button>
-                <span className="w-10 text-center font-bold">{item.quantity}</span>
+                <span className="w-8 sm:w-10 text-center font-bold text-sm sm:text-base">{item.quantity}</span>
                 <button
                   onClick={() => onQuantityChange(item.id, item.quantity + 1)}
-                  className="w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center"
                 >
                   <Plus size={14} />
                 </button>
               </div>
-              <span className="text-gray-500">×</span>
-              <span className="text-xl font-bold text-gray-900">
+              <span className="text-gray-500 text-sm sm:text-base">×</span>
+              <span className="text-lg sm:text-xl font-bold text-gray-900">
                 ₹{item.price.toFixed(2)}
               </span>
             </div>
 
-            <div className="text-xl font-bold text-gray-900">
+            <div className="text-lg sm:text-xl font-bold text-gray-900">
               ₹{(item.price * item.quantity).toFixed(2)}
             </div>
           </div>

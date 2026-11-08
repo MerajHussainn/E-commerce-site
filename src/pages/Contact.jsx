@@ -57,25 +57,25 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#fdfbe9] flex items-center justify-center px-4 py-16 text-gray-900">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="min-h-screen bg-[#fdfbe9] flex items-center justify-center px-3 sm:px-6 py-10 sm:py-16 text-gray-900">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
         
         {/* Left Form Section */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="p-10 bg-white rounded-3xl shadow-2xl"
+          className="p-5 sm:p-8 md:p-10 bg-white rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-green-700">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 text-green-700">
             Get in Touch
           </h1>
 
-          <h2 className="text-lg md:text-xl font-medium mb-4 text-gray-700">
+          <h2 className="text-base sm:text-lg md:text-xl font-medium mb-3 sm:mb-4 text-gray-700">
             Let’s Chat, Contact with Us
           </h2>
 
-          <p className="text-gray-600 mb-6 text-sm md:text-base">
+          <p className="text-gray-600 mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
             Have any questions or feedback? We’re here to help. Send us a message, and we’ll get back to you within 24 hours.
           </p>
 
@@ -147,9 +147,9 @@ const Contact = () => {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white flex flex-col items-center justify-center p-10 rounded-3xl shadow-2xl space-y-8"
+          className="bg-white flex flex-col items-center justify-center p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl space-y-6 sm:space-y-8"
         >
-          <div className="w-56 h-56 rounded-2xl overflow-hidden shadow-lg border-2 border-green-500">
+          <div className="w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-lg border-2 border-green-500">
             <img
               src={contactLogo}
               alt="Contact Person"
@@ -157,28 +157,28 @@ const Contact = () => {
             />
           </div>
 
-          <div className="w-full space-y-5">
-            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-3 p-5 bg-green-50 rounded-xl shadow">
-              <FaEnvelope className="text-green-600 text-xl" />
-              <div>
-                <p className="font-semibold text-gray-900">Email</p>
-                <p className="text-sm text-gray-700">techsupport@yourmail.com</p>
+          <div className="w-full space-y-4 sm:space-y-5">
+            <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3 p-3.5 sm:p-5 bg-green-50 rounded-xl shadow">
+              <FaEnvelope className="text-green-600 text-lg sm:text-xl shrink-0" />
+              <div className="min-w-0">
+                <p className="font-semibold text-gray-900 text-xs sm:text-sm">Email</p>
+                <p className="text-xs sm:text-sm text-gray-700 truncate">techsupport@yourmail.com</p>
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-3 p-5 bg-green-50 rounded-xl shadow">
-              <FaPhoneAlt className="text-green-600 text-xl" />
+            <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3 p-3.5 sm:p-5 bg-green-50 rounded-xl shadow">
+              <FaPhoneAlt className="text-green-600 text-lg sm:text-xl shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">Phone</p>
-                <p className="text-sm text-gray-700">(+005) 432 986 450</p>
+                <p className="font-semibold text-gray-900 text-xs sm:text-sm">Phone</p>
+                <p className="text-xs sm:text-sm text-gray-700">(+005) 432 986 450</p>
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-3 p-5 bg-green-50 rounded-xl shadow">
-              <FaMapMarkerAlt className="text-green-600 text-xl" />
+            <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3 p-3.5 sm:p-5 bg-green-50 rounded-xl shadow">
+              <FaMapMarkerAlt className="text-green-600 text-lg sm:text-xl shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">Address</p>
-                <p className="text-sm text-gray-700">230 Norman Street, New York, HBR 1A1</p>
+                <p className="font-semibold text-gray-900 text-xs sm:text-sm">Address</p>
+                <p className="text-xs sm:text-sm text-gray-700">230 Norman Street, New York, HBR 1A1</p>
               </div>
             </motion.div>
           </div>

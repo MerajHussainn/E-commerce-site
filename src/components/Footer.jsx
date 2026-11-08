@@ -15,7 +15,7 @@ import {
 export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] text-white w-full border-t border-white/10">
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
         
         {/* Brand */}
         <div className="flex flex-col gap-4">
@@ -132,15 +132,6 @@ export default function Footer() {
               >
                 @shusilaupvan
               </a>
-            </li>
-            <li className="flex items-center gap-2">
-              <Leaf size={18} className="text-green-400" />
-              <Link
-                to="/admin"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Admin Panel
-              </Link>
             </li>
           </ul>
         </div>

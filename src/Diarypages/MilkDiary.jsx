@@ -26,7 +26,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Toaster, toast } from "react-hot-toast";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import DeliveryForm from '../pages/DeliveryForm';
@@ -286,33 +286,33 @@ const HeroSection = () => {
   };
 
   return (
-    <motion.div className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+    <motion.div className="relative w-full min-h-[60vh] sm:h-[70vh] py-16 sm:py-0 flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
       {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/20 rounded-full blur-[120px]"
+          className="absolute top-1/4 left-1/4 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-yellow-500/20 rounded-full blur-[100px] sm:blur-[120px]"
           animate={{ scale: [1, 1.2, 1], x: [0, 30, 0], y: [0, -20, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-[100px]"
+          className="absolute bottom-1/4 right-1/4 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-amber-500/20 rounded-full blur-[90px] sm:blur-[100px]"
           animate={{ scale: [1.2, 1, 1.2], x: [0, -20, 0], y: [0, 30, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
-      <motion.div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+      <motion.div className="relative z-10 text-center px-4 max-w-5xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+          className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
         >
           <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
-          <span className="text-gray-400 text-sm">Farm Fresh Daily Delivery</span>
+          <span className="text-gray-400 text-xs sm:text-sm">Farm Fresh Daily Delivery</span>
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+          className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -324,7 +324,7 @@ const HeroSection = () => {
         </motion.h1>
 
         <motion.p
-          className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto"
+          className="text-base sm:text-xl text-gray-400 mb-8 sm:mb-10 max-w-2xl mx-auto px-2"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -333,22 +333,22 @@ const HeroSection = () => {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex justify-center items-center w-full"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.7 }}
         >
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md mx-auto justify-center">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500/50 w-64"
+              className="px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500/50 w-full sm:w-64 text-sm sm:text-base"
             />
             <motion.button
               onClick={handleSubscribe}
-              className="bg-gradient-to-r from-yellow-500 to-amber-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center gap-2"
+              className="bg-gradient-to-r from-yellow-500 to-amber-600 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -363,6 +363,7 @@ const HeroSection = () => {
 
 // Product Grid
 const DairyCarousel = ({ products, onImageClick }) => {
+  const navigate = useNavigate();
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -422,7 +423,7 @@ const DairyCarousel = ({ products, onImageClick }) => {
           <motion.div
             key={product.id}
             className="group relative bg-white/5 rounded-2xl p-4 border border-white/10 hover:border-yellow-500/30 transition-all duration-300 hover:bg-white/10 cursor-pointer"
-            onClick={() => onImageClick(product.slug)}
+            onClick={() => navigate(`/product/${product.slug}`)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -5 }}
@@ -965,6 +966,7 @@ export default function DairyPage() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("popular");
+  const navigate = useNavigate();
 
   const categories = ["All", "Milk", "Premium Milk", "Paneer & Cheese", "Ghee", "Butter", "Fermented Dairy", "Cream"];
   const sortOptions = [
@@ -1020,25 +1022,25 @@ export default function DairyPage() {
       <HeroSection />
       
       <main>
-        <div className="max-w-7xl mx-auto py-24 px-4">
+        <div className="max-w-7xl mx-auto py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Premium Dairy Collection</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Farm-fresh milk, handcrafted ghee, soft paneer and more</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Premium Dairy Collection</h2>
+            <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">Farm-fresh milk, handcrafted ghee, soft paneer and more</p>
           </motion.div>
 
           {/* Filters */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-4 mb-8 items-stretch md:items-center justify-between">
             <div className="flex gap-2 flex-wrap">
               {categories.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
                     filter === cat
                       ? "bg-yellow-600 text-white"
                       : "bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10"
@@ -1049,7 +1051,7 @@ export default function DairyPage() {
               ))}
             </div>
             
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                 <input
@@ -1057,13 +1059,13 @@ export default function DairyPage() {
                   placeholder="Search..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="pl-10 pr-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-yellow-500/50 w-48"
+                  className="pl-10 pr-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-yellow-500/50 w-full sm:w-48"
                 />
               </div>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-yellow-500/50"
+                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-yellow-500/50 w-full sm:w-auto"
               >
                 {sortOptions.map(opt => <option key={opt.value} value={opt.value} className="bg-[#1a1a1a]">{opt.label}</option>)}
               </select>
@@ -1076,7 +1078,7 @@ export default function DairyPage() {
               <p>No dairy products found</p>
             </div>
           ) : (
-            <DairyCarousel products={filteredAndSortedProducts} onImageClick={(slug) => productRefs[slug]?.current?.scrollIntoView({ behavior: "smooth" })} />
+            <DairyCarousel products={filteredAndSortedProducts} onImageClick={(slug) => navigate(`/product/${slug}`)} />
           )}
         </div>
 
