@@ -13,8 +13,8 @@ export default defineConfig(({ mode }) => {
 
     // development server
     server: {
+      host: '0.0.0.0',
       port: 5173,
-      open: true,                       // auto-open browser
       cors: true,                       // allow any origin (for dev)
       proxy: {
         // proxy every /api request to the backend
