@@ -6,6 +6,8 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   updateProfile,
   sendEmailVerification,
@@ -31,6 +33,34 @@ export const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
+
+    // Check for redirect login result if popup was not used
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result && result.user) {
+          const u = result.user;
+          try {
+            const userDocRef = doc(db, "users", u.uid);
+            const userDoc = await getDoc(userDocRef);
+            if (!userDoc.exists()) {
+              await setDoc(
+                userDocRef,
+                {
+                  uid: u.uid,
+                  name: u.displayName || "User",
+                  email: u.email,
+                  createdAt: serverTimestamp(),
+                },
+                { merge: true }
+              );
+            }
+          } catch (_) {}
+          toast.success("Welcome back!");
+        }
+      })
+      .catch((err) => {
+        console.warn("Redirect auth check:", err);
+      });
 
     return () => unsubscribe();
   }, []);
@@ -80,26 +110,39 @@ export const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // ✅ FIXED GOOGLE LOGIN
+  // Google Login (Popup with Redirect fallback for mobile WebViews)
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      let result;
+      try {
+        result = await signInWithPopup(auth, provider);
+      } catch (popupError) {
+        console.warn("Popup blocked or unsupported in WebView, using redirect:", popupError);
+        await signInWithRedirect(auth, provider);
+        return null;
+      }
 
-      const userDocRef = doc(db, "users", user.uid);
-      const userDoc = await getDoc(userDocRef);
-
-      if (!userDoc.exists()) {
-        await setDoc(userDocRef, {
-          uid: user.uid,
-          name: user.displayName,
-          email: user.email,
-          createdAt: serverTimestamp(),
-        });
+      if (result && result.user) {
+        const u = result.user;
+        try {
+          const userDocRef = doc(db, "users", u.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (!userDoc.exists()) {
+            await setDoc(
+              userDocRef,
+              {
+                uid: u.uid,
+                name: u.displayName || "User",
+                email: u.email,
+                createdAt: serverTimestamp(),
+              },
+              { merge: true }
+            );
+          }
+        } catch (_) {}
         toast.success("Welcome to Mushroom Mart!");
-      } else {
-        toast.success("Welcome back!");
       }
       return result;
     } catch (error) {
@@ -108,11 +151,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ FIXED SIGNUP (ROLLBACK ADDED)
+  // Signup with immediate session persistence & graceful Firestore sync
   const signup = async (name, email, password) => {
-    let userCredential;
     try {
-      userCredential = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
@@ -120,31 +162,37 @@ export const AuthProvider = ({ children }) => {
 
       const firebaseUser = userCredential.user;
 
-      await updateProfile(firebaseUser, {
-        displayName: name,
-      });
+      try {
+        await updateProfile(firebaseUser, {
+          displayName: name,
+        });
+      } catch (e) {
+        console.warn("Profile displayName update failed:", e);
+      }
 
-      const userDocRef = doc(db, "users", firebaseUser.uid);
-      await setDoc(userDocRef, {
-        uid: firebaseUser.uid,
-        name: name,
-        email: email,
-        createdAt: serverTimestamp(),
-      });
+      try {
+        const userDocRef = doc(db, "users", firebaseUser.uid);
+        await setDoc(
+          userDocRef,
+          {
+            uid: firebaseUser.uid,
+            name: name,
+            email: email,
+            createdAt: serverTimestamp(),
+          },
+          { merge: true }
+        );
+      } catch (e) {
+        console.warn("Firestore profile sync failed:", e);
+      }
 
-      await sendEmailVerification(firebaseUser);
-      await signOut(auth);
+      try {
+        sendEmailVerification(firebaseUser).catch(() => {});
+      } catch (_) {}
 
-      toast.success(
-        "Account created! Please check your email to verify, then log in."
-      );
-
+      toast.success("Welcome to Mushroom Mart! You are now logged in.");
       return userCredential;
     } catch (error) {
-      // 🔥 rollback auth user if Firestore fails
-      if (userCredential?.user) {
-        await deleteUser(userCredential.user);
-      }
       toast.error(error.message || "Signup failed.");
       throw error;
     }

@@ -43,7 +43,9 @@ class _ServerSettingsDialogState extends State<ServerSettingsDialog> {
   }
 
   void _determinePreset(String url) {
-    if (url.startsWith('http://127.0.0.1')) {
+    if (url.startsWith('http://127.0.0.1') ||
+        url.startsWith('http://localhost') ||
+        url == AppConfig.defaultStandaloneUrl) {
       _selectedPreset = 'standalone';
     } else if (url == AppConfig.defaultEmulatorUrl) {
       _selectedPreset = 'emulator';

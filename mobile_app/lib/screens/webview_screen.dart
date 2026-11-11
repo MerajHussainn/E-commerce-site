@@ -67,7 +67,7 @@ class _MainWebViewScreenState extends State<MainWebViewScreen> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(AppConfig.backgroundColor)
       ..setUserAgent(
-          'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36 ShusilaUpvanApp/1.0')
+          'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36')
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
@@ -120,6 +120,16 @@ class _MainWebViewScreenState extends State<MainWebViewScreen> {
     if (controller.platform is AndroidWebViewController) {
       final androidController = controller.platform as AndroidWebViewController;
       androidController.setMediaPlaybackRequiresUserGesture(false);
+
+      // Enable third-party cookies for Firebase Authentication & Google OAuth
+      try {
+        final androidCookieManager = AndroidWebViewCookieManager(
+          const PlatformWebViewCookieManagerCreationParams(),
+        );
+        androidCookieManager.setAcceptThirdPartyCookies(androidController, true);
+      } catch (e) {
+        debugPrint('Cookie setup error: $e');
+      }
 
       // Handle Geolocation permissions in WebView (e.g. for GPS address auto-fetch)
       androidController.setGeolocationPermissionsPromptCallbacks(
@@ -303,7 +313,7 @@ class _MainWebViewScreenState extends State<MainWebViewScreen> {
               else if (_isLoading)
                 const Positioned.fill(
                   child: FullPageLoadingIndicator(
-                    message: 'Loading Mushroom Mart...',
+                    message: 'Loading E-Commerce Site...',
                   ),
                 ),
             ],

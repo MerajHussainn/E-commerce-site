@@ -41,30 +41,16 @@ class FullPageLoadingIndicator extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [AppConfig.primaryColor, AppConfig.secondaryColor],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppConfig.primaryColor.withValues(alpha: 0.3),
-                    blurRadius: 20,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: const Icon(
-                Icons.eco,
-                size: 36,
-                color: Colors.white,
+              width: 90,
+              height: 60,
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/logo.png',
+                width: 90,
+                fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             const SizedBox(
               width: 32,
               height: 32,
@@ -75,7 +61,7 @@ class FullPageLoadingIndicator extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              message ?? 'Loading Mushroom Mart...',
+              message ?? 'Loading E-Commerce Site...',
               style: const TextStyle(
                 color: AppConfig.textColor,
                 fontSize: 15,

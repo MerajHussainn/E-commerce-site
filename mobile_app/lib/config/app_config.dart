@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/local_asset_server.dart';
 
 class AppConfig {
-  static const String appName = 'Shusila Upvan';
-  static const String appTagline = 'Mushroom Mart & Dairy Farm';
+  static const String appName = 'E-Commerce Site';
+  static const String appTagline = 'Fast & Fresh Online Shopping';
 
   // Standalone marker
   static const String defaultStandaloneUrl = 'local://bundled';
@@ -27,18 +27,21 @@ class AppConfig {
       final prefs = await SharedPreferences.getInstance();
       final saved = prefs.getString(_prefKeyBaseUrl);
 
-      if (saved != null && saved.trim().isNotEmpty) {
-        if (saved == defaultStandaloneUrl) {
-          activeUrl = localUrl;
-        } else {
-          activeUrl = saved.trim();
-        }
+      // Clean up any stale local development IPs so standalone embedded mode works seamlessly
+      if (saved != null &&
+          saved.trim().isNotEmpty &&
+          !saved.contains('10.238.87.29') &&
+          !saved.contains('10.0.2.2') &&
+          !saved.contains('127.0.0.1') &&
+          !saved.contains('localhost') &&
+          saved != defaultStandaloneUrl) {
+        activeUrl = saved.trim();
       } else {
         // By default on mobile, run standalone from built-in assets
-        activeUrl = localUrl.isNotEmpty ? localUrl : defaultLocalWifiUrl;
+        activeUrl = localUrl.isNotEmpty ? localUrl : defaultStandaloneUrl;
       }
     } catch (_) {
-      activeUrl = localUrl.isNotEmpty ? localUrl : defaultLocalWifiUrl;
+      activeUrl = localUrl.isNotEmpty ? localUrl : defaultStandaloneUrl;
     }
 
     return activeUrl;
@@ -47,8 +50,11 @@ class AppConfig {
   /// Save new base URL
   static Future<void> saveBaseUrl(String url) async {
     final trimmed = url.trim();
-    if (trimmed.startsWith('http://127.0.0.1')) {
-      activeUrl = trimmed;
+    if (trimmed.startsWith('http://127.0.0.1') ||
+        trimmed.startsWith('http://localhost') ||
+        trimmed.contains('10.238.87.29') ||
+        trimmed == defaultStandaloneUrl) {
+      activeUrl = LocalAssetServer.serverUrl;
       try {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString(_prefKeyBaseUrl, defaultStandaloneUrl);

@@ -9,7 +9,7 @@ class LocalAssetServer {
 
   static int get port => _port;
   static bool get isRunning => _isRunning;
-  static String get serverUrl => 'http://127.0.0.1:$_port';
+  static String get serverUrl => 'http://localhost:$_port';
 
   /// Start the embedded HTTP server to serve the local bundled web app
   static Future<String> start() async {
@@ -27,7 +27,7 @@ class LocalAssetServer {
 
       _port = _server!.port;
       _isRunning = true;
-      debugPrint('[LocalAssetServer] Started at http://127.0.0.1:$_port');
+      debugPrint('[LocalAssetServer] Started at http://localhost:$_port');
 
       _server!.listen((HttpRequest request) async {
         try {

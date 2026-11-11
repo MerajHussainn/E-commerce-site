@@ -105,62 +105,34 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Brand Icon
+                    // Brand Logo
                     Container(
-                      width: 88,
-                      height: 88,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppConfig.primaryColor,
-                            AppConfig.secondaryColor,
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppConfig.primaryColor.withValues(alpha: 0.35),
-                            blurRadius: 28,
-                            spreadRadius: 4,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.eco_rounded,
-                        size: 48,
-                        color: Colors.white,
+                      width: 140,
+                      height: 100,
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        width: 140,
+                        fit: BoxFit.contain,
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     // App Name
-                    RichText(
-                      text: const TextSpan(
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: -0.5,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Shusila ',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          TextSpan(
-                            text: 'Upvan',
-                            style: TextStyle(color: AppConfig.primaryColor),
-                          ),
-                        ],
+                    const Text(
+                      'E-Commerce Site',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.5,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 8),
 
                     // Tagline
                     const Text(
-                      'Fresh Mushrooms • Organic Dairy Farm',
+                      'Fast & Fresh Online Shopping',
                       style: TextStyle(
                         color: AppConfig.textMuted,
                         fontSize: 13,

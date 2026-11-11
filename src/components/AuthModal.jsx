@@ -104,39 +104,34 @@ setForm({ ...form, [e.target.name]: e.target.value });
 
 // --- Signup handler ---
 const handleSignup = async (e) => {
-e.preventDefault();
-setError("");
+  e.preventDefault();
+  setError("");
 
-if (form.password.length < 6) {
-setError("Password must be at least 6 characters.");
-return;
-}
-if (form.password !== form.confirmPassword) {
-setError("Passwords do not match.");
-return;
-}
-setLoading(true);
-try {
-await signup(form.name, form.email, form.password);
-setIsLogin(true);
-setForm({
-name: "",
-email: form.email,
-password: "",
-confirmPassword: "",
-});
-} catch (err) {
-if (err.code === "auth/email-already-in-use") {
-setError("This email is already registered.");
-} else {
-setError(err.message || "Failed to create account.");
-}
-} finally {
-setLoading(false);
-}
+  if (form.password.length < 6) {
+    setError("Password must be at least 6 characters.");
+    return;
+  }
+  if (form.password !== form.confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
+  setLoading(true);
+  try {
+    await signup(form.name, form.email, form.password);
+    executePendingAction();
+    closeAuthModal();
+    navigate("/", { replace: true });
+  } catch (err) {
+    if (err.code === "auth/email-already-in-use") {
+      setError("This email is already registered.");
+    } else {
+      setError(err.message || "Failed to create account.");
+    }
+  } finally {
+    setLoading(false);
+  }
 };
 
-// --- Login handler ---
 // --- Login handler ---
 const handleLogin = async (e) => {
   e.preventDefault();
@@ -151,19 +146,15 @@ const handleLogin = async (e) => {
     closeAuthModal();
     navigate("/", { replace: true });
   } catch (err) {
-    // 🔥 Email not verified error
-    if (err.message === "Email not verified") {
+    // Wrong credentials
+    if (err.code === "auth/invalid-credential" || err.code === "auth/wrong-password" || err.code === "auth/user-not-found") {
+      setError("Invalid email or password.");
+    } else if (err.message === "Email not verified") {
       setError(
         "Your email is not verified. Please check your inbox for the verification link."
       );
       setShowResend(true);
-    } 
-    // 🔥 Wrong credentials
-    else if (err.code === "auth/invalid-credential") {
-      setError("Invalid email or password.");
-    } 
-    // 🔥 Other errors
-    else {
+    } else {
       setError(err.message || "Login failed.");
     }
   } finally {
@@ -171,21 +162,22 @@ const handleLogin = async (e) => {
   }
 };
 
-
 // Google login handler
 const handleGoogleAuth = async () => {
-setError("");
-setLoading(true);
-try {
-await handleGoogleLogin();
-executePendingAction();
-closeAuthModal();
-navigate("/", { replace: true });
-} catch (err) {
-setError(err.message || "Google login failed.");
-} finally {
-setLoading(false);
-}
+  setError("");
+  setLoading(true);
+  try {
+    const res = await handleGoogleLogin();
+    if (res) {
+      executePendingAction();
+      closeAuthModal();
+      navigate("/", { replace: true });
+    }
+  } catch (err) {
+    setError(err.message || "Google login failed.");
+  } finally {
+    setLoading(false);
+  }
 };
 
 // --- Forgot Password Handler ---
