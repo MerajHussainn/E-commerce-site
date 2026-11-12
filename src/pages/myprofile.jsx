@@ -1,8 +1,8 @@
 // src/pages/AccountSettings.jsx
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { 
-  User, Mail, Phone, MapPin, Calendar, Lock, Shield, Bell, CreditCard, 
+import {
+  User, Mail, Phone, MapPin, Calendar, Lock, Shield, Bell, CreditCard,
   Globe, Eye, EyeOff, Camera, CheckCircle, XCircle, Upload, Trash2,
   Smartphone, Download, HelpCircle, LogOut, ChevronRight, AlertCircle
 } from 'lucide-react';
@@ -23,7 +23,7 @@ const AccountSettings = () => {
     priceDrops: true,
     newsletter: false
   });
-  
+
   const [profileData, setProfileData] = useState({
     name: '',
     email: '',
@@ -143,8 +143,8 @@ const AccountSettings = () => {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activeTab === tab.id
-                        ? 'bg-blue-50 text-blue-600 border border-blue-100'
-                        : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-blue-50 text-blue-600 border border-blue-100'
+                      : 'text-gray-700 hover:bg-gray-50'
                       }`}
                   >
                     {tab.icon}
@@ -162,7 +162,7 @@ const AccountSettings = () => {
                   <LogOut size={18} />
                   <span className="font-medium">Logout</span>
                 </button>
-                
+
                 <button
                   onClick={() => setActiveTab('help')}
                   className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors mt-2"
@@ -203,8 +203,8 @@ const AccountSettings = () => {
                     <button
                       onClick={() => setIsEditing(!isEditing)}
                       className={`px-4 py-2 rounded-lg font-medium ${isEditing
-                          ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          : 'bg-blue-600 text-white hover:bg-blue-700'
+                        ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-blue-600 text-white hover:bg-blue-700'
                         } transition-colors`}
                     >
                       {isEditing ? 'Cancel' : 'Edit Profile'}
@@ -247,7 +247,7 @@ const AccountSettings = () => {
                         <input
                           type="text"
                           value={profileData.name}
-                          onChange={(e) => setProfileData({...profileData, name: e.target.value})}
+                          onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                       ) : (
@@ -265,7 +265,7 @@ const AccountSettings = () => {
                           <input
                             type="email"
                             value={profileData.email}
-                            onChange={(e) => setProfileData({...profileData, email: e.target.value})}
+                            onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
                             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
                         ) : (
@@ -289,7 +289,7 @@ const AccountSettings = () => {
                           <input
                             type="tel"
                             value={profileData.phone}
-                            onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
+                            onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
                             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
                         ) : (
@@ -312,7 +312,7 @@ const AccountSettings = () => {
                         <input
                           type="date"
                           value={profileData.dob}
-                          onChange={(e) => setProfileData({...profileData, dob: e.target.value})}
+                          onChange={(e) => setProfileData({ ...profileData, dob: e.target.value })}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                       ) : (
@@ -330,7 +330,7 @@ const AccountSettings = () => {
                       {isEditing ? (
                         <select
                           value={profileData.gender}
-                          onChange={(e) => setProfileData({...profileData, gender: e.target.value})}
+                          onChange={(e) => setProfileData({ ...profileData, gender: e.target.value })}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         >
                           <option value="male">Male</option>
@@ -360,7 +360,7 @@ const AccountSettings = () => {
                             value={profileData.address.street}
                             onChange={(e) => setProfileData({
                               ...profileData,
-                              address: {...profileData.address, street: e.target.value}
+                              address: { ...profileData.address, street: e.target.value }
                             })}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
@@ -379,7 +379,7 @@ const AccountSettings = () => {
                             value={profileData.address.city}
                             onChange={(e) => setProfileData({
                               ...profileData,
-                              address: {...profileData.address, city: e.target.value}
+                              address: { ...profileData.address, city: e.target.value }
                             })}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
@@ -398,7 +398,7 @@ const AccountSettings = () => {
                             value={profileData.address.state}
                             onChange={(e) => setProfileData({
                               ...profileData,
-                              address: {...profileData.address, state: e.target.value}
+                              address: { ...profileData.address, state: e.target.value }
                             })}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
@@ -417,7 +417,7 @@ const AccountSettings = () => {
                             value={profileData.address.zipCode}
                             onChange={(e) => setProfileData({
                               ...profileData,
-                              address: {...profileData.address, zipCode: e.target.value}
+                              address: { ...profileData.address, zipCode: e.target.value }
                             })}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
@@ -455,7 +455,7 @@ const AccountSettings = () => {
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-2">Change Password</h2>
                   <p className="text-gray-600 mb-6">Secure your account with a new password</p>
-                  
+
                   <div className="space-y-4 max-w-lg">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -465,7 +465,7 @@ const AccountSettings = () => {
                         <input
                           type={showOldPassword ? "text" : "password"}
                           value={passwordData.oldPassword}
-                          onChange={(e) => setPasswordData({...passwordData, oldPassword: e.target.value})}
+                          onChange={(e) => setPasswordData({ ...passwordData, oldPassword: e.target.value })}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                         <button
@@ -485,7 +485,7 @@ const AccountSettings = () => {
                         <input
                           type={showNewPassword ? "text" : "password"}
                           value={passwordData.newPassword}
-                          onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                          onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                         <button
@@ -507,7 +507,7 @@ const AccountSettings = () => {
                       <input
                         type="password"
                         value={passwordData.confirmPassword}
-                        onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                        onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
@@ -533,7 +533,7 @@ const AccountSettings = () => {
                         {profileData.twoFactorEnabled ? 'Enabled' : 'Disabled'}
                       </span>
                       <button
-                        onClick={() => setProfileData({...profileData, twoFactorEnabled: !profileData.twoFactorEnabled})}
+                        onClick={() => setProfileData({ ...profileData, twoFactorEnabled: !profileData.twoFactorEnabled })}
                         className={`relative inline-flex h-6 w-11 items-center rounded-full ${profileData.twoFactorEnabled ? 'bg-blue-600' : 'bg-gray-300'}`}
                       >
                         <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${profileData.twoFactorEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
@@ -564,7 +564,7 @@ const AccountSettings = () => {
                       </div>
                       <span className="text-sm text-green-600 font-medium">Active now</span>
                     </div>
-                    
+
                     <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                       <div className="flex items-center gap-3">
                         <Smartphone size={20} className="text-gray-500" />
@@ -578,7 +578,7 @@ const AccountSettings = () => {
                       </button>
                     </div>
                   </div>
-                  
+
                   <button className="w-full mt-4 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Log out from all other devices
                   </button>
@@ -610,7 +610,7 @@ const AccountSettings = () => {
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-2">Notification Preferences</h2>
                 <p className="text-gray-600 mb-6">Choose how you want to be notified</p>
-                
+
                 <div className="space-y-6">
                   {/* Email Notifications */}
                   <div>
@@ -662,10 +662,19 @@ const AccountSettings = () => {
                     </div>
                   </div>
 
-                  <div className="pt-6 border-t border-gray-200">
-                    <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                      Save Preferences
+                  <div className="pt-6 border-t border-gray-200 flex flex-wrap items-center gap-3">
+                    <button
+                      onClick={() => toast.success('Preferences saved successfully')}
+                      className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      Save Quick Preferences
                     </button>
+                    <a
+                      href="/notification-settings"
+                      className="px-6 py-2.5 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors inline-flex items-center gap-2"
+                    >
+                      <Bell size={16} /> Advanced Push & Category Preferences →
+                    </a>
                   </div>
                 </div>
               </div>
@@ -676,7 +685,7 @@ const AccountSettings = () => {
               <div className="space-y-6">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-6">Preferences</h2>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -684,7 +693,7 @@ const AccountSettings = () => {
                       </label>
                       <select
                         value={profileData.language}
-                        onChange={(e) => setProfileData({...profileData, language: e.target.value})}
+                        onChange={(e) => setProfileData({ ...profileData, language: e.target.value })}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="en">English</option>
@@ -701,7 +710,7 @@ const AccountSettings = () => {
                       </label>
                       <select
                         value={profileData.currency}
-                        onChange={(e) => setProfileData({...profileData, currency: e.target.value})}
+                        onChange={(e) => setProfileData({ ...profileData, currency: e.target.value })}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="INR">Indian Rupee (₹)</option>
@@ -718,12 +727,12 @@ const AccountSettings = () => {
                           <span className="font-medium text-gray-900">Download your data</span>
                           <Download size={20} className="text-gray-500" />
                         </button>
-                        
+
                         <button className="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
                           <span className="font-medium text-gray-900">Clear search history</span>
                           <Trash2 size={20} className="text-gray-500" />
                         </button>
-                        
+
                         <button className="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
                           <span className="font-medium text-gray-900">Manage connected devices</span>
                           <Smartphone size={20} className="text-gray-500" />
@@ -739,7 +748,7 @@ const AccountSettings = () => {
             {activeTab === 'help' && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">Help & Support</h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="p-6 border border-gray-200 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-colors">
                     <div className="flex items-center gap-3 mb-4">
@@ -779,12 +788,12 @@ const AccountSettings = () => {
                       <div className="font-medium text-gray-900">Return Policy</div>
                       <div className="text-sm text-gray-500 mt-1">Learn about returns & refunds</div>
                     </button>
-                    
+
                     <button className="p-4 border border-gray-200 rounded-lg text-left hover:bg-gray-50">
                       <div className="font-medium text-gray-900">Shipping Info</div>
                       <div className="text-sm text-gray-500 mt-1">Track orders & delivery</div>
                     </button>
-                    
+
                     <button className="p-4 border border-gray-200 rounded-lg text-left hover:bg-gray-50">
                       <div className="font-medium text-gray-900">Privacy Policy</div>
                       <div className="text-sm text-gray-500 mt-1">How we protect your data</div>

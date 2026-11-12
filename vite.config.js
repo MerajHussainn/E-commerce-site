@@ -19,9 +19,9 @@ export default defineConfig(({ mode }) => {
       proxy: {
         // proxy every /api request to the backend
         '/api': {
-          target: env.VITE_API_URL || 'https://your-backend-api.com',
+          target: env.VITE_API_URL || 'http://localhost:5001',
           changeOrigin: true,           // sets host header to backend
-          secure: true,                 // set to false if backend uses self-signed cert
+          secure: false,                // set to false for local dev server
           rewrite: path => path         // keep path as-is
         }
       }

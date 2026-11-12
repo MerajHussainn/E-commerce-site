@@ -29,6 +29,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useOrders } from '../context/OrderContext';
 import DeliveryForm from '../pages/DeliveryForm';
 
 // --- IMAGE IMPORTS ---
@@ -374,6 +375,7 @@ const MushroomCarousel = ({ mushrooms, onImageClick }) => {
   const totalPages = Math.ceil(mushrooms.length / itemsPerPage);
   const { addToCart } = useCart();
   const { user, openAuthModal } = useAuth();
+  const { addOrder } = useOrders();
   const [showDeliveryForm, setShowDeliveryForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -416,6 +418,7 @@ const MushroomCarousel = ({ mushrooms, onImageClick }) => {
   };
 
   const handleOrderSubmit = (orderData) => {
+    addOrder(orderData);
     toast.success(`Order #${orderData.orderId} placed successfully!`);
     setShowDeliveryForm(false);
     setSelectedProduct(null);
@@ -599,6 +602,7 @@ const MushroomCarousel = ({ mushrooms, onImageClick }) => {
 const QuantitySelector = ({ mushroom }) => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { addOrder } = useOrders();
   const [showDeliveryForm, setShowDeliveryForm] = useState(false);
   const { user, openAuthModal } = useAuth();
 
@@ -684,8 +688,9 @@ const QuantitySelector = ({ mushroom }) => {
                 <DeliveryForm 
                   product={{ ...mushroom, selectedQuantity: quantity }}
                   quantity={quantity}
-                  onSubmit={() => {
-                    toast.success("Order placed!");
+                  onSubmit={(orderData) => {
+                    addOrder(orderData);
+                    toast.success("Order placed successfully!");
                     setShowDeliveryForm(false);
                   }}
                   onCancel={() => setShowDeliveryForm(false)}

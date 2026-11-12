@@ -25,6 +25,7 @@ import { toast } from "react-hot-toast";
 import { getProductBySlug, getSimilarProducts } from "../data/allProducts";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import { useOrders } from "../context/OrderContext";
 import DeliveryForm from "./DeliveryForm";
 
 function ProductDetail() {
@@ -32,6 +33,7 @@ function ProductDetail() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { user, openAuthModal } = useAuth();
+  const { addOrder } = useOrders();
 
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -137,6 +139,7 @@ function ProductDetail() {
   };
 
   const handleOrderSubmit = (orderData) => {
+    addOrder(orderData);
     toast.success(`Order placed successfully! Order ID: ${orderData.orderId || "OK"}`);
     setShowDeliveryModal(false);
   };

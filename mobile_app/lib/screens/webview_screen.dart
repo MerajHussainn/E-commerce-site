@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -68,6 +69,25 @@ class _MainWebViewScreenState extends State<MainWebViewScreen> {
       ..setBackgroundColor(AppConfig.backgroundColor)
       ..setUserAgent(
           'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36')
+      ..addJavaScriptChannel(
+        'FlutterBridge',
+        onMessageReceived: (JavaScriptMessage message) async {
+          try {
+            final Map<String, dynamic> data = jsonDecode(message.message);
+            final action = data['action'];
+            if (action == 'REQUEST_PUSH_PERMISSION') {
+              await Permission.notification.request();
+            } else if (action == 'NAVIGATE') {
+              final path = data['path'] as String?;
+              if (path != null) {
+                _navigateToPath(path);
+              }
+            }
+          } catch (e) {
+            debugPrint('FlutterBridge error: $e');
+          }
+        },
+      )
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
@@ -95,6 +115,10 @@ class _MainWebViewScreenState extends State<MainWebViewScreen> {
                 _loadingProgress = 100;
                 _currentUrl = url;
               });
+              controller.runJavaScript('''
+                window.isFlutterMobileApp = true;
+                window.dispatchEvent(new CustomEvent('flutterBridgeReady'));
+              ''');
             }
           },
           onWebResourceError: (WebResourceError error) {
@@ -360,6 +384,11 @@ class _MainWebViewScreenState extends State<MainWebViewScreen> {
                   icon: Icons.shopping_bag_rounded,
                   label: 'Cart',
                   onTap: () => _navigateToPath('/cart'),
+                ),
+                _buildNavItem(
+                  icon: Icons.notifications_rounded,
+                  label: 'Alerts',
+                  onTap: () => _navigateToPath('/notifications'),
                 ),
                 _buildNavItem(
                   icon: Icons.person_rounded,

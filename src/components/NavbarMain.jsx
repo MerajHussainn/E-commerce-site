@@ -21,9 +21,12 @@ import {
   Headphones,
   Leaf,
   Milk,
+  Bell,
+  Shield,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import { useNotifications } from "../context/NotificationContext";
 
 const mushroomServices = [
   { to: "/farmer-support", icon: Sprout, label: "Cultivation Support", desc: "Expert mushroom growing support" },
@@ -63,6 +66,7 @@ const MushroomNavbar = () => {
   } = useAuth();
 
   const { cartCount } = useCart();
+  const { unreadCount } = useNotifications();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => {
@@ -350,11 +354,26 @@ const MushroomNavbar = () => {
           </nav>
 
           {/* Right Side */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5 sm:gap-6">
+            {/* Notifications Bell */}
+            <NavLink
+              to="/notifications"
+              className="relative text-gray-400 hover:text-white transition-colors"
+              title="Notifications"
+            >
+              <Bell size={22} />
+              {unreadCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-emerald-500 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse shadow-md shadow-emerald-950/60">
+                  {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
+              )}
+            </NavLink>
+
             {/* Cart */}
             <NavLink
               to="/cart"
               className="relative text-gray-400 hover:text-white transition-colors"
+              title="Shopping Cart"
             >
               <ShoppingCart size={22} />
               {cartCount > 0 && (
@@ -378,13 +397,27 @@ const MushroomNavbar = () => {
                   </button>
 
                   {profileOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl py-2 shadow-xl z-50">
+                    <div className="absolute right-0 mt-2 w-52 bg-[#1a1a1a] border border-white/10 rounded-xl py-2 shadow-xl z-50">
                       <Link
                         to="/profile"
                         onClick={closeMenu}
                         className="flex items-center gap-3 px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
                       >
                         <User size={16} /> My Profile
+                      </Link>
+                      <Link
+                        to="/notifications"
+                        onClick={closeMenu}
+                        className="flex items-center justify-between px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                      >
+                        <span className="flex items-center gap-3">
+                          <Bell size={16} /> Notifications
+                        </span>
+                        {unreadCount > 0 && (
+                          <span className="bg-emerald-500 text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                            {unreadCount}
+                          </span>
+                        )}
                       </Link>
                       <Link
                         to="/orders"
@@ -399,6 +432,13 @@ const MushroomNavbar = () => {
                         className="flex items-center gap-3 px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
                       >
                         <ShoppingBag size={16} /> My Cart
+                      </Link>
+                      <Link
+                        to="/admin/notifications"
+                        onClick={closeMenu}
+                        className="flex items-center gap-3 px-4 py-2 text-sm text-emerald-400 hover:text-emerald-300 hover:bg-white/5 transition-colors"
+                      >
+                        <Shield size={16} /> Notification Manager
                       </Link>
                       <button
                         onClick={handleUpdatePassword}
@@ -613,6 +653,37 @@ const MushroomNavbar = () => {
               }
             >
               <ShoppingCart size={20} /> Cart ({cartCount})
+            </NavLink>
+
+            <NavLink
+              to="/notifications"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                `flex items-center justify-between py-3 text-lg font-medium border-b border-white/5 ${
+                  isActive ? "text-emerald-400" : "text-gray-400"
+                }`
+              }
+            >
+              <span className="flex items-center gap-3">
+                <Bell size={20} /> Notifications
+              </span>
+              {unreadCount > 0 && (
+                <span className="bg-emerald-500 text-black text-xs font-bold px-2 py-0.5 rounded-full">
+                  {unreadCount} new
+                </span>
+              )}
+            </NavLink>
+
+            <NavLink
+              to="/admin/notifications"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                `flex items-center gap-3 py-3 text-base font-medium border-b border-white/5 ${
+                  isActive ? "text-emerald-400" : "text-emerald-400/80"
+                }`
+              }
+            >
+              <Shield size={18} /> Admin Notifications
             </NavLink>
 
             {/* Mobile Auth */}

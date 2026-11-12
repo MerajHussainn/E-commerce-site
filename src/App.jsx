@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
+import { NotificationProvider } from "./context/NotificationContext";
 import ChatWidget from "./components/ChatWidget";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthModal from "./components/AuthModal";
@@ -28,6 +29,9 @@ import Cart from "./pages/Cart";
 import MyProfile from "./pages/myprofile";
 import MyOrders from "./pages/myorders";
 import ProductDetail from "./pages/ProductDetail";
+import NotificationCentre from "./pages/NotificationCentre";
+import NotificationSettings from "./pages/NotificationSettings";
+import AdminNotifications from "./pages/AdminNotifications";
 
 /* ================= DIARY PAGES ================= */
 import DiaryHome from "./Diarypages/DiaryHome";
@@ -125,7 +129,8 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <OrderProvider>
-          <div className="bg-[#0a0a0a] text-white min-h-screen flex flex-col font-inter relative overflow-x-hidden universal-bg">
+          <NotificationProvider>
+            <div className="bg-[#0a0a0a] text-white min-h-screen flex flex-col font-inter relative overflow-x-hidden universal-bg">
             <ScrollToTop />
             <Toaster position="top-center" />
             <AuthModal />
@@ -219,6 +224,9 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route path="notifications" element={<NotificationCentre />} />
+                <Route path="notification-settings" element={<NotificationSettings />} />
+                <Route path="admin/notifications" element={<AdminNotifications />} />
               </Route>
 
               {/* DAIRY */}
@@ -251,7 +259,8 @@ function App() {
 
             <ChatWidget />
           </div>
-        </OrderProvider>
+        </NotificationProvider>
+      </OrderProvider>
       </CartProvider>
     </AuthProvider>
   );

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "5079396310",
+    "project_id": "susheela-upvan",
+    "storage_bucket": "susheela-upvan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5079396310:android:3b29c91f092e07e866be77",
+        "android_client_info": {
+          "package_name": "com.shusilaupvan.mushroom_mart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrUTpFLDU6ItF-ARVARcEBgMHEy3x0ULM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+

@@ -1,5 +1,6 @@
 // src/pages/MyOrders.jsx
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { 
   Package, Truck, CheckCircle, Clock, XCircle, 
   Eye, Download, Filter, Search, RefreshCw, 
@@ -9,8 +10,14 @@ import {
   AlertCircle, ShoppingBag, FileText, ShoppingCart
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
+import notificationService from '../services/notificationService';
 
 const MyOrders = () => {
+  const { user: authUser } = useAuth();
+  const [searchParams] = useSearchParams();
+  const targetOrderId = searchParams.get('id');
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,8 +26,8 @@ const MyOrders = () => {
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   
-  // Mock user data (replace with your actual auth logic)
-  const user = {
+  // Real user from AuthContext, with demo fallback
+  const user = authUser || {
     uid: 'user123',
     displayName: 'John Doe',
     email: 'john@example.com'
@@ -61,7 +68,19 @@ const MyOrders = () => {
     };
 
     fetchOrders();
-  }, []);
+  }, [user?.uid]);
+
+  // Handle notification deep link (?id=ORD1234)
+  useEffect(() => {
+    if (targetOrderId && orders.length > 0) {
+      const matched = orders.find(
+        o => o.id === targetOrderId || o.orderId === targetOrderId
+      );
+      if (matched) {
+        setSelectedOrder(matched);
+      }
+    }
+  }, [targetOrderId, orders]);
 
   // Generate mock orders for demo
   const getMockOrders = () => {
@@ -272,12 +291,17 @@ const MyOrders = () => {
       switch(action) {
         case 'cancel':
           // Update order status locally
+          const targetCancelOrder = orders.find(o => o.id === orderId);
           setOrders(prev => prev.map(order => 
             order.id === orderId 
               ? { ...order, status: 'cancelled', paymentStatus: 'refunded' }
               : order
           ));
           toast.success(`Order ${orderId} cancelled successfully`);
+          notificationService.triggerOrderStatusUpdate(orderId, 'cancelled', {
+            amount: targetCancelOrder?.totalAmount,
+            userId: user?.uid
+          }).catch(console.warn);
           break;
           
         case 'repeat':
@@ -294,7 +318,15 @@ const MyOrders = () => {
           break;
           
         case 'return':
+          setOrders(prev => prev.map(order => 
+            order.id === orderId 
+              ? { ...order, status: 'return_requested' }
+              : order
+          ));
           toast.success(`Return requested for order ${orderId}`);
+          notificationService.triggerOrderStatusUpdate(orderId, 'return_requested', {
+            userId: user?.uid
+          }).catch(console.warn);
           break;
       }
     } catch (error) {
